@@ -8,7 +8,7 @@ import { mock2FAs } from "./mock";
 import SortAble from "components/SortAble";
 
 const TwoFAIItems = () => {
-  const { twoFAs, set2FA } = useMainStore();
+  const { twoFAs, set2FA, update2FACode } = useMainStore();
 
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     const newTwoFAs = update(twoFAs, {
@@ -18,6 +18,10 @@ const TwoFAIItems = () => {
       ],
     });
     set2FA(newTwoFAs);
+  };
+
+  const handleEnd = (id: number) => {
+    update2FACode(id);
   };
 
   /**
@@ -33,7 +37,7 @@ const TwoFAIItems = () => {
     <div>
       {twoFAs.map((item, i) => (
         <SortAble key={item.id} id={item.id} index={i} moveCard={moveCard}>
-          <TwoFAItem twoFA={item} />
+          <TwoFAItem twoFA={item} onEnd={handleEnd} />
         </SortAble>
       ))}
     </div>

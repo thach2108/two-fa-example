@@ -3,15 +3,13 @@ import CountDown from "pages/TwoFA/components/CountDown";
 import { ReactComponent as AppIcon } from "assets/svg/app-1-svgrepo-com.svg";
 import { useState } from "react";
 import { formatCode } from "utils/helper";
-import { observer } from "mobx-react-lite";
-import { useMainStore } from "store";
 import TwoFAStore from "store/TwoFAStore";
 
 export type Props = {
   twoFA: TwoFAStore;
   className?: string;
   animationTime?: number;
-  handleEnd?: () => void;
+  onEnd?: (id: number) => void;
   moveCard?: (dragIndex: number, hoverIndex: number) => void;
 };
 
@@ -19,15 +17,13 @@ const TwoFAItem = ({
   twoFA,
   animationTime = 60,
   className,
-  handleEnd = () => {},
+  onEnd = () => {},
 }: Props) => {
   const [isDefault, setIsDefault] = useState<boolean>(false);
-  const { update2FACode } = useMainStore();
   const { id, iconUrl, currentTime, code, name } = twoFA;
 
-  const _handleEnd = () => {
-    update2FACode(id);
-    handleEnd();
+  const handleEnd = () => {
+    onEnd(id);
   };
 
   return (
@@ -65,10 +61,10 @@ const TwoFAItem = ({
       <CountDown
         animationTime={animationTime}
         currentTime={currentTime}
-        onEnd={_handleEnd}
+        onEnd={handleEnd}
       />
     </div>
   );
 };
 
-export default observer(TwoFAItem);
+export default TwoFAItem;

@@ -2,7 +2,6 @@ import { render } from "@testing-library/react";
 import TwoFAStore from "store/TwoFAStore";
 import { randX } from "utils/helper";
 import TwoFAItem from "./item";
-import WrapperTest from "WraperTest";
 
 const curentTime = 5;
 const id = randX(0, 999999);
@@ -10,11 +9,7 @@ jest.setTimeout((curentTime + 2) * 1000);
 const mockData = new TwoFAStore(id, "Automation test", curentTime);
 
 const Item = ({ twoFA = mockData, reRenderFunc = () => {} }) => {
-  return (
-    <WrapperTest>
-      <TwoFAItem animationTime={60} twoFA={twoFA} handleEnd={reRenderFunc} />
-    </WrapperTest>
-  );
+  return <TwoFAItem animationTime={60} twoFA={twoFA} onEnd={reRenderFunc} />;
 };
 
 test("Render the name successfully", () => {
