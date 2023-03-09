@@ -22,7 +22,7 @@ const App = ({ twoFA, reRenderFunc = () => {} }: TestingAppType) => {
   );
 };
 
-test("Render the name successfully", () => {
+test("Render the name successfully", () => { 
   const { getByText } = render(<App twoFA={mockData} />);
   const appName = getByText(/Automation test/i);
   /**
