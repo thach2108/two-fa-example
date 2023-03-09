@@ -38,7 +38,14 @@ const Input = ({
         className={cx(["border px-4 rounded-2xl outline-red-100"])}
         onChange={onChange}
       />
-      {error ? <p className="px-4 text-xs text-red-400">{error}</p> : null}
+      {error ? (
+        <p
+          data-testid={`error-input-${name}`}
+          className="px-4 text-xs text-red-400"
+        >
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 };

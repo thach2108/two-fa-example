@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import CountDown from ".";
 
-const curentTime = 15;
+const curentTime = 5;
 jest.setTimeout((curentTime + 2) * 1000);
 
 type TestingAppType = {
@@ -20,18 +20,15 @@ const App = ({ reRenderFunc = () => {} }: TestingAppType) => {
 
 test("Render the counter successfully", () => {
   const { getByText } = render(<App />);
-  const appName = getByText(curentTime);
-  /**
-   * the app's name have is Automation test
-   */
-  expect(appName).toBeInTheDocument();
+  const textTime = getByText(curentTime);
+  expect(textTime).toBeInTheDocument();
 });
 
 test(`Refresh the code affter ${curentTime}(s)`, async () => {
   global.console.error = jest.fn();
   const reRenderFunc = jest.fn(() => {
     /**
-     * if the couter <= 0 the handle end function will be call
+     * if the couter <= 0: the handle end function will be call
      */
   });
   const { rerender } = render(<App reRenderFunc={reRenderFunc} />);

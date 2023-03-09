@@ -36,7 +36,9 @@ function CreateForm() {
             error={formik.errors.name}
             onChange={formik.handleChange}
           />
-          <Button type="submit">Add</Button>
+          <Button dataTestid={`submit-btn`} type="submit">
+            Add
+          </Button>
         </div>
       </form>
     </div>

@@ -4,7 +4,7 @@ import MainStoreProvider from "store/context";
 import { randX } from "utils/helper";
 import TwoFAItem from "./item";
 
-const curentTime = 15;
+const curentTime = 5;
 const id = randX(0, 999999);
 jest.setTimeout((curentTime + 2) * 1000);
 const mockData = new TwoFA(id, "Automation test", curentTime);
@@ -22,11 +22,11 @@ const App = ({ twoFA, reRenderFunc = () => {} }: TestingAppType) => {
   );
 };
 
-test("Render the name successfully", () => { 
+test("Render the name successfully", () => {
   const { getByText } = render(<App twoFA={mockData} />);
   const appName = getByText(/Automation test/i);
   /**
-   * the app's name have is Automation test
+   * the app's name is Automation test
    */
   expect(appName).toBeInTheDocument();
 });
@@ -46,7 +46,7 @@ test(`Refresh the code affter ${curentTime}(s)`, async () => {
   global.console.error = jest.fn();
   const reRenderFunc = jest.fn(() => {
     /**
-     * if the couter < 0 the app's code will be refreshed
+     * if the couter < 0: the app's code will be refreshed
      */
     mockData.updateCode();
   });
@@ -64,7 +64,7 @@ test(`Refresh the code affter ${curentTime}(s)`, async () => {
    */
   expect(reRenderFunc).toBeCalled();
   /**
-   * after refresh; the prev code is different the current code
+   * after refresh, the prev code is different the current code
    */
   expect(curentCode).not.toEqual(prevCode);
 });
