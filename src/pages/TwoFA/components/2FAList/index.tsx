@@ -8,7 +8,7 @@ import { mock2FAs } from "./mock";
 import SortAble from "components/SortAble";
 
 const TwoFAIItems = () => {
-  const { twoFAs, set2FA, update2FACode } = useMainStore();
+  const { twoFAs, set2FA } = useMainStore();
 
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     const newTwoFAs = update(twoFAs, {
@@ -20,10 +20,6 @@ const TwoFAIItems = () => {
     set2FA(newTwoFAs);
   };
 
-  const handleEnd = (id: number) => {
-    update2FACode(id);
-  };
-
   /**
    * This useEffect is used for demo
    */
@@ -33,11 +29,18 @@ const TwoFAIItems = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    return () => {
+      twoFAs.forEach((item) => item.destroy());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div>
       {twoFAs.map((item, i) => (
         <SortAble key={item.id} id={item.id} index={i} moveCard={moveCard}>
-          <TwoFAItem twoFA={item} onEnd={handleEnd} />
+          <TwoFAItem twoFA={item} />
         </SortAble>
       ))}
     </div>

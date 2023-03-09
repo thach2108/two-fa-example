@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import cx from "classnames";
 import { CircleStyle, CountDownStyle, OverlayStyle } from "./styles";
+import { observer } from "mobx-react-lite";
 
 export type Props = {
   color?: string;
@@ -10,7 +11,6 @@ export type Props = {
   borderWidth?: number;
   animationTime: number;
   currentTime: number;
-  onEnd?: () => void;
 };
 
 const CountDown = ({
@@ -21,29 +21,15 @@ const CountDown = ({
   borderWidth = 3,
   currentTime = 0,
   animationTime = 60,
-  onEnd = () => {},
 }: Props) => {
-  const intervalRef = useRef<any>(null);
-  const [count, setCount] = useState(currentTime);
   const [timeLoss, setTimeLoss] = useState(animationTime - currentTime);
 
-  const decrement = () => {
-    setCount((numb) => numb - 1);
-  };
-
   useEffect(() => {
-    if (count <= 0) {
-      setCount(animationTime);
+    if (currentTime <= 0) {
       setTimeLoss(0);
-      onEnd();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count]);
-
-  useEffect(() => {
-    intervalRef.current = setInterval(decrement, 1000);
-    return () => clearInterval(intervalRef.current);
-  }, []);
+  }, [currentTime]);
 
   return (
     <CountDownStyle
@@ -55,7 +41,7 @@ const CountDown = ({
       ])}
     >
       <span className="absolute font-bold inset-0 rotate-45 flex items-center justify-center text-sm">
-        {count}
+        {currentTime}
       </span>
       <CircleStyle
         color={color}
@@ -74,4 +60,4 @@ const CountDown = ({
   );
 };
 
-export default CountDown;
+export default observer(CountDown);

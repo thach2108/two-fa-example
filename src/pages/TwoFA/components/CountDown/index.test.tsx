@@ -1,4 +1,5 @@
 import { render } from "@testing-library/react";
+import WrapperTest from "WraperTest";
 import CountDown from ".";
 
 const curentTime = 5;
@@ -6,11 +7,13 @@ jest.setTimeout((curentTime + 2) * 1000);
 
 const Counter = ({ reRenderFunc = () => {} }) => {
   return (
-    <CountDown
-      animationTime={60}
-      currentTime={curentTime}
-      onEnd={reRenderFunc}
-    />
+    <WrapperTest>
+      <CountDown
+        animationTime={60}
+        currentTime={curentTime}
+        // onEnd={reRenderFunc}
+      />
+    </WrapperTest>
   );
 };
 

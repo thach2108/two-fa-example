@@ -4,27 +4,18 @@ import { ReactComponent as AppIcon } from "assets/svg/app-1-svgrepo-com.svg";
 import { useState } from "react";
 import { formatCode } from "utils/helper";
 import TwoFAStore from "store/TwoFAStore";
+import { observer } from "mobx-react-lite";
 
 export type Props = {
   twoFA: TwoFAStore;
   className?: string;
   animationTime?: number;
-  onEnd?: (id: number) => void;
   moveCard?: (dragIndex: number, hoverIndex: number) => void;
 };
 
-const TwoFAItem = ({
-  twoFA,
-  animationTime = 60,
-  className,
-  onEnd = () => {},
-}: Props) => {
+const TwoFAItem = ({ twoFA, animationTime = 60, className }: Props) => {
   const [isDefault, setIsDefault] = useState<boolean>(false);
   const { id, iconUrl, currentTime, code, name } = twoFA;
-
-  const handleEnd = () => {
-    onEnd(id);
-  };
 
   return (
     <div
@@ -58,13 +49,9 @@ const TwoFAItem = ({
           </p>
         </div>
       </div>
-      <CountDown
-        animationTime={animationTime}
-        currentTime={currentTime}
-        onEnd={handleEnd}
-      />
+      <CountDown animationTime={animationTime} currentTime={currentTime} />
     </div>
   );
 };
 
-export default TwoFAItem;
+export default observer(TwoFAItem);
