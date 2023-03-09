@@ -7,6 +7,15 @@
 
 .layout {
   height: 800px;
+
+  &__body {
+    height: calc(800px - 61px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 
 .two-fa {

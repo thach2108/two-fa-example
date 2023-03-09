@@ -12,6 +12,7 @@ export type Props = {
   className?: string;
   animationTime?: number;
   handleEnd?: () => void;
+  moveCard?: (dragIndex: number, hoverIndex: number) => void;
 };
 
 const TwoFAItem = ({
@@ -22,7 +23,7 @@ const TwoFAItem = ({
 }: Props) => {
   const [isDefault, setIsDefault] = useState<boolean>(false);
   const { update2FACode } = useMainStore();
-  const { id, iconUrl: icon, currentTime, code, name } = twoFA;
+  const { id, iconUrl, currentTime, code, name } = twoFA;
 
   const _handleEnd = () => {
     update2FACode(id);
@@ -32,7 +33,7 @@ const TwoFAItem = ({
   return (
     <div
       className={cx([
-        "flex justify-between items-center two-fa pb-3 pt-1 border-b",
+        "flex justify-between items-center two-fa pb-3 pt-1 border-b cursor-grab -mx-3 px-3",
         className,
       ])}
     >
@@ -43,7 +44,7 @@ const TwoFAItem = ({
           <div className="two-fa__logo mr-2">
             <img
               className="cover-img"
-              src={icon}
+              src={iconUrl}
               alt="logo"
               onError={() => {
                 setIsDefault(true);

@@ -49,9 +49,12 @@ const CountDown = ({
     <CountDownStyle
       width={width}
       height={height}
-      className={cx(["cursor-pointer -rotate-45 translate-y-1", className])}
+      className={cx([
+        "bg-white -rotate-45 translate-y-1 rounded-full",
+        className,
+      ])}
     >
-      <span className="absolute inset-0 rotate-45 flex items-center justify-center text-sm">
+      <span className="absolute font-bold inset-0 rotate-45 flex items-center justify-center text-sm">
         {count}
       </span>
       <CircleStyle

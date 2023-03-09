@@ -6,14 +6,17 @@ class TwoFAStore {
     makeAutoObservable(this);
     this.id = id;
     this.name = name;
-    if (currentTime) this.currentTime = currentTime;
+    this.code = randX(100000, 999999);
+    this.currentTime = currentTime ? currentTime : randX(0, 60);
+    this.iconUrl =
+      randX(0, 100) % 2 ? "./assets/app/app-2.svg" : "./assets/app/app-1.svg";
   }
 
   id: number;
   name: string;
-  currentTime: number = randX(0, 60);
-  code: number = randX(100000, 999999);
-  iconUrl: string = "./assets/app/app-1.svg";
+  currentTime: number;
+  code: number;
+  iconUrl: string;
 
   updateCode() {
     this.code = randX(100000, 999999);

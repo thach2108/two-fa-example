@@ -17,7 +17,7 @@ function Layout({ className, children }: Props) {
     >
       <Header />
       <Divider className="-mx-3" />
-      {children}
+      <div className="layout__body rounded-2xl">{children}</div>
     </div>
   );
 }
