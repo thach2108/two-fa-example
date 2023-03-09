@@ -5,10 +5,10 @@ import { useState } from "react";
 import { formatCode } from "utils/helper";
 import { observer } from "mobx-react-lite";
 import { useMainStore } from "store";
-import TwoFA from "store/Classes/TwoFA";
+import TwoFAStore from "store/TwoFAStore";
 
 export type Props = {
-  twoFA: TwoFA;
+  twoFA: TwoFAStore;
   className?: string;
   animationTime?: number;
   handleEnd?: () => void;
@@ -22,7 +22,7 @@ const TwoFAItem = ({
 }: Props) => {
   const [isDefault, setIsDefault] = useState<boolean>(false);
   const { update2FACode } = useMainStore();
-  const { id, icon, currentTime, code, name } = twoFA;
+  const { id, iconUrl: icon, currentTime, code, name } = twoFA;
 
   const _handleEnd = () => {
     update2FACode(id);

@@ -1,8 +1,6 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainStoreProvider from "store/context";
-
-import "./assets/svg/svg.scss";
 import "./App.scss";
 
 const TwoFAList = lazy(() => import("./pages/TwoFA/views/List"));

@@ -3,7 +3,7 @@ import Input from "components/Input";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useMainStore } from "store";
-import TwoFA from "store/Classes/TwoFA";
+import TwoFAStore from "store/TwoFAStore";
 import { string, object } from "yup";
 
 const validator = object({
@@ -20,7 +20,7 @@ function CreateForm() {
     validationSchema: validator,
     onSubmit: (values) => {
       if (!formik.isValid) return;
-      add2FA(new TwoFA(twoFAs.length, values.name));
+      add2FA(new TwoFAStore(twoFAs.length, values.name));
       navigate("/");
     },
   });

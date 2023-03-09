@@ -4,11 +4,7 @@ import CountDown from ".";
 const curentTime = 5;
 jest.setTimeout((curentTime + 2) * 1000);
 
-type TestingAppType = {
-  reRenderFunc?: () => void;
-};
-
-const App = ({ reRenderFunc = () => {} }: TestingAppType) => {
+const Counter = ({ reRenderFunc = () => {} }) => {
   return (
     <CountDown
       animationTime={60}
@@ -19,7 +15,7 @@ const App = ({ reRenderFunc = () => {} }: TestingAppType) => {
 };
 
 test("Render the counter successfully", () => {
-  const { getByText } = render(<App />);
+  const { getByText } = render(<Counter />);
   const textTime = getByText(curentTime);
   expect(textTime).toBeInTheDocument();
 });
@@ -31,11 +27,11 @@ test(`Refresh the code affter ${curentTime}(s)`, async () => {
      * if the couter <= 0: the handle end function will be call
      */
   });
-  const { rerender } = render(<App reRenderFunc={reRenderFunc} />);
+  const { rerender } = render(<Counter reRenderFunc={reRenderFunc} />);
   await new Promise<string>((resolve) =>
     setTimeout(() => resolve(""), (curentTime + 1) * 1000)
   );
-  rerender(<App />);
+  rerender(<Counter />);
   /**
    * the refresh function will be called
    */

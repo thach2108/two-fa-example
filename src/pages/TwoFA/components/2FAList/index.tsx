@@ -1,28 +1,20 @@
 import TwoFAItem from "./item";
 import { observer } from "mobx-react-lite";
 import { useMainStore } from "store";
-import TwoFA from "store/Classes/TwoFA";
+import TwoFAStore from "store/TwoFAStore";
 import { useEffect } from "react";
 import { ReactSortable } from "react-sortablejs";
-
-const mocks = [
-  "App name",
-  "App name 2",
-  "App name 3",
-  "App name 4",
-  "App name 5",
-  "App name 6",
-];
+import { mock2FAs } from "./mock";
 
 const TwoFAIItems = () => {
   const { twoFAs, set2FA } = useMainStore();
 
   /**
-   * (This useEffect is used for demo)
+   * This useEffect is used for demo
    */
   useEffect(() => {
-    if (twoFAs.length) return; // test
-    set2FA(mocks.map((name, i) => new TwoFA(i, name)));
+    if (twoFAs.length) return;
+    set2FA(mock2FAs.map((name, i) => new TwoFAStore(i, name)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,29 +1,24 @@
 import { render } from "@testing-library/react";
-import TwoFA from "store/Classes/TwoFA";
-import MainStoreProvider from "store/context";
+import TwoFAStore from "store/TwoFAStore";
 import { randX } from "utils/helper";
 import TwoFAItem from "./item";
+import WrapperTest from "WraperTest";
 
 const curentTime = 5;
 const id = randX(0, 999999);
 jest.setTimeout((curentTime + 2) * 1000);
-const mockData = new TwoFA(id, "Automation test", curentTime);
+const mockData = new TwoFAStore(id, "Automation test", curentTime);
 
-type TestingAppType = {
-  twoFA: TwoFA;
-  reRenderFunc?: () => void;
-};
-
-const App = ({ twoFA, reRenderFunc = () => {} }: TestingAppType) => {
+const Item = ({ twoFA = mockData, reRenderFunc = () => {} }) => {
   return (
-    <MainStoreProvider>
+    <WrapperTest>
       <TwoFAItem animationTime={60} twoFA={twoFA} handleEnd={reRenderFunc} />
-    </MainStoreProvider>
+    </WrapperTest>
   );
 };
 
 test("Render the name successfully", () => {
-  const { getByText } = render(<App twoFA={mockData} />);
+  const { getByText } = render(<Item twoFA={mockData} />);
   const appName = getByText(/Automation test/i);
   /**
    * the app's name is Automation test
@@ -32,7 +27,7 @@ test("Render the name successfully", () => {
 });
 
 test("Render the code successfully", () => {
-  const { getByTestId } = render(<App twoFA={mockData} />);
+  const { getByTestId } = render(<Item twoFA={mockData} />);
   const appCode = getByTestId(`two-fa-code-${id}`)
     .innerHTML.replace(" ", "")
     .split("");
@@ -51,13 +46,13 @@ test(`Refresh the code affter ${curentTime}(s)`, async () => {
     mockData.updateCode();
   });
   const { getByTestId, rerender } = render(
-    <App twoFA={mockData} reRenderFunc={reRenderFunc} />
+    <Item twoFA={mockData} reRenderFunc={reRenderFunc} />
   );
   const prevCode = getByTestId(`two-fa-code-${id}`).innerHTML;
   await new Promise<string>((resolve) =>
     setTimeout(() => resolve(""), (curentTime + 1) * 1000)
   );
-  rerender(<App twoFA={mockData} />);
+  rerender(<Item twoFA={mockData} />);
   const curentCode = getByTestId(`two-fa-code-${id}`).innerHTML;
   /**
    * the refresh function will be called

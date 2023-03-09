@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import React, { useContext } from "react";
-import TwoFA from "./Classes/TwoFA";
+import TwoFAStore from "./TwoFAStore";
 
 export default class MainStore {
   constructor() {
@@ -10,12 +10,12 @@ export default class MainStore {
   /**
    * TwoFA
    */
-  twoFAs: TwoFA[] = [];
-  set2FA = (twoFAs: TwoFA[]) => {
+  twoFAs: TwoFAStore[] = [];
+  set2FA = (twoFAs: TwoFAStore[]) => {
     this.twoFAs = twoFAs;
   };
 
-  update2FA = (value: TwoFA) => {
+  update2FA = (value: TwoFAStore) => {
     const index = this.twoFAs.findIndex((t) => t.id === value.id);
     if (index !== -1) {
       this.twoFAs[index] = value;
@@ -29,15 +29,9 @@ export default class MainStore {
     }
   };
 
-  add2FA = (code: TwoFA) => {
+  add2FA = (code: TwoFAStore) => {
     this.twoFAs.push(code);
   };
-
-  /**
-   *
-   */
-  anyStore: any[] = [];
-  anyFunc = () => {};
 }
 
 export const MainStoreContext = React.createContext<MainStore>(
