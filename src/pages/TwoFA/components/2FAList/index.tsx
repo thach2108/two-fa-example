@@ -29,13 +29,6 @@ const TwoFAIItems = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    return () => {
-      twoFAs.forEach((item) => item.destroy());
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div>
       {twoFAs.map((item, i) => (
