@@ -1,18 +1,19 @@
-import cx from "classnames";
-import CounterView from "pages/TwoFA/components/CounterView";
 import { ReactComponent as AppIcon } from "assets/svg/app-1-svgrepo-com.svg";
-import { useState } from "react";
-import { formatCode } from "utils/helper";
-import TwoFAStore from "store/TwoFAStore";
+import cx from "classnames";
 import { observer } from "mobx-react-lite";
+import CounterView from "pages/TwoFA/components/CounterView";
+import { useState } from "react";
+import TwoFAStore from "store/TwoFAStore";
+import { formatCode } from "utils/helper";
 
 export type Props = {
   twoFA: TwoFAStore;
+  index?: number;
   className?: string;
   moveCard?: (dragIndex: number, hoverIndex: number) => void;
 };
 
-const TwoFAItem = ({ twoFA, className }: Props) => {
+const TwoFAItem = ({ index, twoFA, className }: Props) => {
   const [isDefault, setIsDefault] = useState<boolean>(false);
   const { id, iconUrl, currentTime, code, name, animationTime } = twoFA;
 
@@ -48,7 +49,11 @@ const TwoFAItem = ({ twoFA, className }: Props) => {
           </p>
         </div>
       </div>
-      <CounterView animationTime={animationTime} currentTime={currentTime} />
+      <CounterView
+        index={index}
+        animationTime={animationTime}
+        currentTime={currentTime}
+      />
     </div>
   );
 };

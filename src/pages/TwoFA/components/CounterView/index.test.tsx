@@ -1,26 +1,17 @@
 import { render } from "@testing-library/react";
+import { ANIMATION_TIME } from "utils/consts";
 import CounterView from ".";
-
-const Counter = ({ curentTime = 60, reRefeshFunc = () => {} }) => {
-  return (
-    <CounterView
-      animationTime={60}
-      currentTime={curentTime}
-      onRefresh={reRefeshFunc}
-    />
-  );
-};
 
 test("Render the counter successfully", () => {
   const c = 5;
-  const { getByText } = render(<Counter curentTime={c} />);
+  const { getByText } = render(<CounterView currentTime={c} />);
   const textTime = getByText(c);
   expect(textTime).toBeInTheDocument();
 });
 
-test(`Refresh the code if curentTime === 0 || 60`, () => {
+test(`Refresh the code if curentTime === 0 || ${ANIMATION_TIME}`, () => {
   const reRefeshFunc = jest.fn(() => {});
-  render(<Counter reRefeshFunc={reRefeshFunc} />);
+  render(<CounterView onRefresh={reRefeshFunc} />);
   /**
    * the refresh function will be called
    */

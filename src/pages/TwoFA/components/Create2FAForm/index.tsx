@@ -4,7 +4,8 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useMainStore } from "store";
 import TwoFAStore from "store/TwoFAStore";
-import { string, object } from "yup";
+import { ANIMATION_TIME } from "utils/consts";
+import { object, string } from "yup";
 
 const validator = object({
   name: string().required("Required"),
@@ -20,7 +21,14 @@ function CreateForm() {
     validationSchema: validator,
     onSubmit: (values) => {
       if (!formik.isValid) return;
-      add2FA(new TwoFAStore(twoFAs.length, values.name));
+      add2FA(
+        new TwoFAStore(
+          twoFAs.length,
+          values.name,
+          ANIMATION_TIME,
+          ANIMATION_TIME
+        )
+      );
       navigate("/");
     },
   });

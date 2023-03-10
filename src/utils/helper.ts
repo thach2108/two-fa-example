@@ -1,10 +1,12 @@
+import { ANIMATION_TIME } from "./consts";
+
 /**
  * to <= resule <= from
  * @param from
  * @param to
  * @returns
  */
-export const randX = (from: number = 0, to: number = 60) => {
+export const randX = (from: number = 0, to: number = ANIMATION_TIME) => {
   var a = Math.floor(Math.random() * (to - from)) + from;
   return a;
 };

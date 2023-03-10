@@ -1,5 +1,5 @@
-import MainStoreProvider from "store/context";
 import { BrowserRouter as Router } from "react-router-dom";
+import MainStoreProvider from "store/context";
 
 const WrapperTest = ({ children }: { children: React.ReactNode }) => {
   return (

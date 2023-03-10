@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { HeaderPath } from "utils/eums";
-import Header from ".";
 import WrapperTest from "WraperTest";
+import Header from ".";
 
 const Head = () => {
   return (

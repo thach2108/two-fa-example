@@ -1,11 +1,11 @@
-import TwoFAItem from "./item";
+import SortAble from "components/SortAble";
+import update from "immutability-helper";
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 import { useMainStore } from "store";
 import TwoFAStore from "store/TwoFAStore";
-import { useEffect } from "react";
-import update from "immutability-helper";
+import TwoFAItem from "./item";
 import { mock2FAs } from "./mock";
-import SortAble from "components/SortAble";
 
 const TwoFAIItems = () => {
   const { twoFAs, set2FA } = useMainStore();
@@ -33,7 +33,7 @@ const TwoFAIItems = () => {
     <div>
       {twoFAs.map((item, i) => (
         <SortAble key={item.id} id={item.id} index={i} moveCard={moveCard}>
-          <TwoFAItem twoFA={item} />
+          <TwoFAItem index={i} twoFA={item} />
         </SortAble>
       ))}
     </div>

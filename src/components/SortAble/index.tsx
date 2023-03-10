@@ -1,8 +1,8 @@
 import cx from "classnames";
 import type { Identifier, XYCoord } from "dnd-core";
 import { cloneElement, useRef } from "react";
-import TwoFAStore from "store/TwoFAStore";
 import { useDrag, useDrop } from "react-dnd/dist/hooks";
+import TwoFAStore from "store/TwoFAStore";
 
 export type Props = {
   id: number;

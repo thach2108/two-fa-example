@@ -1,5 +1,5 @@
-import { ReactComponent as PlusIcon } from "assets/svg/plus-alt-svgrepo-com.svg";
 import { ReactComponent as LeftArrowIcon } from "assets/svg/left-lg-svgrepo-com.svg";
+import { ReactComponent as PlusIcon } from "assets/svg/plus-alt-svgrepo-com.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HeaderPath } from "utils/eums";
 

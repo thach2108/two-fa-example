@@ -1,6 +1,6 @@
+import cx from "classnames";
 import Divider from "components/Divider";
 import Header from "components/Header";
-import cx from "classnames";
 
 export type Props = {
   children: React.ReactNode;
