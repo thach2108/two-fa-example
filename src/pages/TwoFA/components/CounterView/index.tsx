@@ -9,6 +9,7 @@ export type Props = {
   index?: number;
   width?: number;
   height?: number;
+  negative?: boolean;
   className?: string;
   borderWidth?: number;
   currentTime?: number;
@@ -21,6 +22,7 @@ const CounterView = ({
   index = 0,
   width = 40,
   height = 40,
+  negative,
   className,
   borderWidth = 3,
   currentTime = ANIMATION_TIME,
@@ -58,11 +60,14 @@ const CounterView = ({
         color={color}
         width={width}
         height={height}
+        negative={negative}
         timeLoss={timeLoss}
         borderWidth={borderWidth}
         animationTime={animationTime}
       />
       <OverlayStyle
+        color={color}
+        negative={negative}
         timeLoss={timeLoss}
         borderWidth={borderWidth}
         animationTime={animationTime}
