@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import cx from "classnames";
-import { CircleStyle, CountDownStyle, OverlayStyle } from "./styles";
+import { CircleStyle, CounterViewStyle, OverlayStyle } from "./styles";
 import { observer } from "mobx-react-lite";
 
 export type Props = {
@@ -11,9 +11,10 @@ export type Props = {
   borderWidth?: number;
   animationTime: number;
   currentTime: number;
+  onRefresh?: () => void;
 };
 
-const CountDown = ({
+const CounterView = ({
   color = "#0e0551",
   width = 40,
   height = 40,
@@ -21,18 +22,20 @@ const CountDown = ({
   borderWidth = 3,
   currentTime = 0,
   animationTime = 60,
+  onRefresh = () => {},
 }: Props) => {
   const [timeLoss, setTimeLoss] = useState(animationTime - currentTime);
 
   useEffect(() => {
-    if (currentTime <= 0) {
+    if (currentTime === animationTime) {
       setTimeLoss(0);
+      onRefresh();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTime]);
 
   return (
-    <CountDownStyle
+    <CounterViewStyle
       width={width}
       height={height}
       className={cx([
@@ -56,8 +59,8 @@ const CountDown = ({
         borderWidth={borderWidth}
         animationTime={animationTime}
       ></OverlayStyle>
-    </CountDownStyle>
+    </CounterViewStyle>
   );
 };
 
-export default observer(CountDown);
+export default observer(CounterView);

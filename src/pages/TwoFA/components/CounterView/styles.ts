@@ -108,12 +108,12 @@ const rotateOverlay = ({ timeLoss, animationTime }: KeyframesType) => {
   `;
 };
 
-type CountDownStyleType = {
+type CounterViewStyleType = {
   width: number;
   height: number;
 };
 
-export const CountDownStyle = styled("div")<CountDownStyleType>(
+export const CounterViewStyle = styled("div")<CounterViewStyleType>(
   ({ width = 50, height = 50 }) => ({
     width,
     height,

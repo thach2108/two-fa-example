@@ -19,7 +19,6 @@ class TwoFAStore {
 
     this.interval = setInterval(() => {
       action(() => {
-        console.log("test");
         this.countDown();
       })();
     }, 1000);

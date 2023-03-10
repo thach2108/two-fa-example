@@ -1,5 +1,5 @@
 import cx from "classnames";
-import CountDown from "pages/TwoFA/components/CountDown";
+import CounterView from "pages/TwoFA/components/CounterView";
 import { ReactComponent as AppIcon } from "assets/svg/app-1-svgrepo-com.svg";
 import { useState } from "react";
 import { formatCode } from "utils/helper";
@@ -9,13 +9,12 @@ import { observer } from "mobx-react-lite";
 export type Props = {
   twoFA: TwoFAStore;
   className?: string;
-  animationTime?: number;
   moveCard?: (dragIndex: number, hoverIndex: number) => void;
 };
 
-const TwoFAItem = ({ twoFA, animationTime = 60, className }: Props) => {
+const TwoFAItem = ({ twoFA, className }: Props) => {
   const [isDefault, setIsDefault] = useState<boolean>(false);
-  const { id, iconUrl, currentTime, code, name } = twoFA;
+  const { id, iconUrl, currentTime, code, name, animationTime } = twoFA;
 
   return (
     <div
@@ -49,7 +48,7 @@ const TwoFAItem = ({ twoFA, animationTime = 60, className }: Props) => {
           </p>
         </div>
       </div>
-      <CountDown animationTime={animationTime} currentTime={currentTime} />
+      <CounterView animationTime={animationTime} currentTime={currentTime} />
     </div>
   );
 };
